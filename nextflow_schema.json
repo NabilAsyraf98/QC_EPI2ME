@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://example.com/nextflow_schema.json",
+  "title": "QC-Nanoplot",
+  "workflow_title": "QC-Nanoplot workflow",
+  "description": "Nextflow workflow QC-Nanoplot repository.",
+  "type": "object",
+  "definitions": {
+    "input": {
+      "title": "Input Options",
+      "type": "object",
+      "fa_icon": "fas fa-arrow-right",
+      "description": "Parameters for finding and handling input data for analysis.",
+      "properties": {
+        "fastq/bam": {
+          "type": "string",
+          "format": "directory-path",
+          "title": "INPUT",
+          "description": "Only FASTQ/BAM files are allowed to be used in the analysis.",
+          "help_text": "Provide the path to A DIRECTORY containing FASTQ and/or BAM files."
+        }
+      },
+      "required":["fastq/bam","fileType"]    
+    },
+    "Type of files": {
+      "title": "Type of files",
+      "type": "object",
+      "fa_icon": "fas fa-filter",
+      "description": "Specify the type of files to be analysed in this run ---either BAM or FASTQ",
+      "properties": {
+        "fileType": {
+          "type": "string",
+          "title": "Type of file",
+          "description": "Specify the type of files to be analysed in this run ---either BAM or FASTQ",
+          "help_text": "Please select from drop-down options.",
+          "enum": ["fastq","bam"],
+          "id": "params.fileType"
+        }
+      }
+    },
+    "output": {
+      "title": "Output Options",
+      "type": "object",
+      "fa_icon": "fas fa-arrow-left",
+      "description": "Parameters for saving and naming workflow outputs.",
+      "properties": {
+        "out_dir": {
+          "type": "string",
+          "default": "nanoplot_logs",
+          "format": "directory-path",
+          "description": "Directory where output files will be saved.",
+          "help_text": "The directory where NanoPlot will save its output files, including .html, .png, .txt, and logs."
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "#/definitions/input"
+    },
+    {
+      "$ref": "#/definitions/output"
+    }
+  ],
+  "properties": {
+    "monochrome_logs": {
+      "type": "boolean",
+      "default": false,
+      "description": "If true, the logs will be printed without colors."
+    },
+    "validate_params": {
+      "type": "boolean",
+      "default": true,
+      "description": "Enable parameter validation before starting the workflow."
+    }
+  },
+  "resources": {
+    "recommended": {
+      "cpus": 2,
+      "memory": "4GB"
+    },
+    "minimum": {
+      "cpus": 1,
+      "memory": "2GB"
+    },
+    "run_time": "5 minutes per file",
+    "disk_space": "10GB",
+    "arm_support": true
+  }
+}

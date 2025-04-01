@@ -1,2 +1,1 @@
-# QC_EPI2ME
-Nanoplot and Filtong on EPI2ME. Written on Nextflow
+Nanoplot is a plotting tool for long read sequencing data and alignments. This is for processing multiple reads files simultaneously. 
